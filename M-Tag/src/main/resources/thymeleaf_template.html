@@ -1,0 +1,417 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        @page {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .page{
+            height: 100%;
+        }
+
+        .borda{border: 1px solid #000;}
+        .text-left{text-align: left;}
+        .text-center{text-align: center;}
+        .text-right{text-align: right;}
+
+        p{margin:0;line-height:1.3;}
+        .ml-5{margin-left:5px}
+        .mt-3{margin-top:3mm}
+        .mt-5{margin-top:5mm}
+        .mx-5{margin-left: 5mm; margin-right: 5mm}
+        .px-2{padding-left: 2mm; padding-right: 2mm;}
+        .px-4{padding-left: 4mm; padding-right: 4mm;}
+        .px-5{padding-left: 5mm; padding-right: 5mm;}
+        .py-2{padding-top: 2mm; padding-bottom: 2mm;}
+        .pt-3{padding-top: 3mm}
+        .pt-5{padding-top: 5mm}
+
+        .pl-5{padding-left: 6mm}
+
+        .p0{padding: 0; margin: 0;}
+
+        .pt-1mm{padding-top:1mm}
+        .pt-10mm{padding-top:10mm}
+
+        .fl{float: left;}
+
+        .w40mm{width:40mm;}
+        .w84mm{width:84mm;}
+        .w80mm{width:80mm;}
+        .w100{display:block;width:100%;}
+        .img{width: 20mm;}
+        .logo_kangu{width: 25mm;}
+        .img_servico{padding-top:3mm}
+
+        .fs-9 {font-size: 9pt;}
+        .fs-10{font-size:10pt}
+        .fs-11{font-size:11pt}
+        .fs-12{font-size:12pt}
+        .fb{font-weight: bold}
+
+        .bred{border-color: red}
+
+        .h2{height:0.2mm; background-color: black}
+        .h18{height:18mm; background-color: red}
+        .barcode{display: block; height:100mm; background-color: blue}
+
+
+        .bgb{background-color: blue; color: white}
+
+        .va-top{vertical-align: top;}
+        .va-bottom{vertical-align: bottom;}
+
+
+        .lbl_destinatario{display: block; padding-left: 5mm; background-color: black; color: white; font-weight: bold; font-size: 11pt}
+        .logo-correios{width: 64mm; height: 7mm; overflow-y: hidden}
+        .img_logo_correios{height: 5mm;}
+        .img_servico{width: 18mm; height: 18mm; object-fit: contain; padding: 1mm}
+
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div style="border: 1px solid #000000; height: 40px; width: 680px;">
+
+        <!--If([correios])-->
+        <p style="text-align: center;"><span style="font-size: 18px;"><strong>ENTREGUE A CAIXA EM QUALQUER AGÊNCIA DOS CORREIOS</strong></span></p>
+        <!--endIf-->
+
+        <!--If([kangu])-->
+        <div style="font-size: 12px; text-align: center; width: 100%; padding: 5px;"><strong>KANGU, ME CONTA SOBRE O PONTO EM QUE VOU DEIXAR O PACOTE? CLAROOOO!</strong></div>
+        <div style="float: left; width: 250px; text-align: center; font-size: 8px; padding-top: -5px;"><strong>{apelido_filial}</strong><br /> {tipo_filial} {logradouro_filial}, {numero_filial}<br /> {complemento_filial} {bairro_filial}<br /> {cidade_filial} / {uf_filial} - CEP: {cep_filial}</div>
+        <div style="float: left; width: 350px;">
+            <table>
+                <tbody>
+                <tr>
+                    <td style="font-size: 8px; padding: 3px; padding-top: -5px;"><img src="public/layout/kangu/images/logo-mini-kangu.png" alt="" height="8" /> HORÁRIO DE FUNCIONAMENTO:</td>
+                    <td style="font-size: 8px; padding: 3px; padding-top: -3px;">{hora_func}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 8px; padding: 3px; padding-top: 0px;"><img src="public/layout/kangu/images/logo-mini-kangu.png" alt="" height="8" /> ESTACIONAMENTO NO LOCAL:</td>
+                    <td style="font-size: 8px; padding: 3px; padding-top: 1px;">{estacionamento}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 8px; padding: 3px; padding-top: 1px;"><img src="public/layout/kangu/images/logo-mini-kangu.png" alt="" height="8" /> VENDA DE EMBALAGEM NO LOCAL:</td>
+                    <td style="font-size: 8px; padding: 3px; padding-top: 2px;">{embalagem}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--endIf-->
+
+    </div>
+
+    <div style="padding-top: 20px;">
+        <div style="padding-top: 0px; border-bottom: 2px dotted #000000; border-top: 2px dotted #000000;">
+
+            <!-- etiqueta -->
+            <div style="float: left; width: 340px;">
+                <div style="border: 2px dotted #000000; width: 106.36mm;">
+
+                    <table class="w100 pt-1mm">
+                        <tr>
+                            <td class="px-5">
+                                <table class="w100">
+                                    <tr>
+                                        <td class="" style="width: 33.03mm;">
+                                            <div style="width:25mm;height:25mm;">
+                                                <img class="logo_kangu" style=""
+                                                     src="public/layout/kangu/images/kangu-preto-branco.jpg" alt="" />
+                                            </div>
+                                        </td>
+                                        <td class="">
+                                            <!--beginQrCode-->{barcode_2d_correio}::style::width:25mm;height:25mm;<!--endQrCode-->
+                                        </td>
+                                        <td style="width: 32.12mm" class="va-top text-right">
+                                            {imagem_servico}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="w100">
+                        <tr>
+                            <td class="px-5">
+                                <table class="w100">
+                                    <tr>
+                                        <td class="va-top" style="width: 30.03mm;">
+                                            <p class="fs-9">NF:{numero_nfe_pedido}</p>
+                                            <p class="fs-9">Pedido:{numero_cli_pedido}</p>
+                                        </td>
+                                        <td class="text-center va-top" style="width: 36mm">
+                                            <p class="fs-9">Contrato: <strong>{num_contrato}</strong></p>
+                                            <p class="fs-9"><strong>{descricao_servico}</strong></p>
+                                        </td>
+                                        <td class="pl-5">
+                                            <p class="fs-9">Volume: {seq_vol}/{qtd_vol_pedido}</p>
+                                            <p class="fs-9">Peso(g): <strong>{peso_grama}</strong></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="w100 fs-12">
+                        <tr>
+                            <td class="">
+                                <table class="text-center w100 px-5">
+                                    <tr>
+                                        <td class="w80mm">
+                                            <span class="fs-11"><strong>{barcode_correio_dv}</strong></span>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+
+                                <table class="text-center">
+                                    <tr>
+                                        <td class=" va-top px-5">
+                                            <table class="w100">
+                                                <tr>
+                                                    <td class="va-top">
+                                                        <!--begin1DCode-->{barcode_correio_dv}::style::width:80mm;height:18mm;<!--end1DCode-->
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="va-top fb">VD</td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                    <table class="w100 mt-3">
+                        <tr>
+                            <td class="px-5">
+                                Recebedor:____________________________________________________________
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td class="px-5 pt-3">
+                                Assinatura:_______________________  Documento:________________________
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="w100 mt-3">
+                        <tr>
+                            <td class="w100 h2"></td>
+                        </tr>
+                    </table>
+
+                    <table class="w100">
+                        <tr>
+                            <td>
+                                <table class="w100 fs-11">
+                                    <tr>
+                                        <td class="lbl_destinatario">DESTINATÁRIO</td>
+                                        <td rowspan="2" class="text-right logo-correios px-2">
+                                            <img class="img_logo_correios"
+                                                 src="public/layout/kangu/images/correios-preto-branco_sem-borda.jpg" alt="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class=""></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="px-5">
+                                <table class="w100 fs-11">
+                                    <tr>
+                                        <td class="">{nome_cliente_dest}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">{tipo_endereco_cliente_dest} {logradouro_endereco_cliente_dest},{numero_endereco_cliente_dest}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">
+                                            <!--If([complemento_endereco_cliente_dest])-->{complemento_endereco_cliente_dest} -
+                                            <!--endIf-->{bairro_endereco_cliente_dest}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">
+                                            <strong>{cep_endereco_cliente_dest}</strong> {cidade_endereco_cliente_dest}/{uf_endereco_cliente_dest}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="">
+                        <tr>
+                            <td class="px-5"><!--begin1DCode-->{cep_dest_num}::style::width:35mm;height:18mm;padding:0 2mm<!--end1DCode--></td>
+                        </tr>
+                    </table>
+                    <table class="w100 mt-3">
+                        <tr>
+                            <td class="w100 h2"></td>
+                        </tr>
+                    </table>
+                    <table class="w100">
+                        <tr>
+                            <td class="px-5 py-2 fs-10">
+                                <strong>Remetente:</strong>
+                                {nome_cliente}<br />{tipo_endereco_cliente} {logradouro_endereco_cliente},
+                                {numero_endereco_cliente}<br />
+                                <!--If([complemento_endereco_cliente])-->{complemento_endereco_cliente} -
+                                <!--endIf-->{bairro_endereco_cliente}<br /><strong>{cep_endereco_cliente}</strong>
+                                {cidade_endereco_cliente}-{uf_endereco_cliente}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="font-size: 12px; text-align: left;">
+                    </div>
+
+                </div>
+            </div>
+            <!-- fim etiqueta -->
+
+            <!-- Danfe -->
+            <div style="float: left; width: 340px;">
+                <div style="float: left; width: 340px;">
+                    <div style="border-left: 2px dotted #000000; border-right: 2px dotted #000000; padding: 10px; width: 340px;">
+
+                        <div style="float: left; padding-left: 40px; text-align: center; width: 80%; margin-top: 17px;">
+                     <span style="font-size: 12px;">
+                        <strong>DANFE SIMPLIFICADO</strong>
+                     </span>
+                        </div>
+
+                        <br />
+                        <br />
+
+                        <div style="float: left; padding-left: 0px; text-align: center; width: 100%;">
+                     <span style="font-size: 12px;">
+                        <strong>{nome_cliente}</strong>
+                     </span>
+                        </div>
+
+                        <div style="float: left; padding-left: 0px; text-align: center; width: 100%;">
+                     <span style="font-size: 12px;">
+                        CNPJ: {codigo_cliente} - UF: {uf_endereco_cliente}
+                     </span>
+                        </div>
+
+                        <br />
+
+                        <div style="float: left; padding-left: 0px; text-align: center; width: 340px;"><span style="font-size: 12px;"><strong>Chave de Acesso</strong><br /></span> <!--begin1DCode-->{barcode_chave_nfe}<!--end1DCode--></div>
+                        <div style="float: left; padding-left: 0px; text-align: center; width: 340px; font-size: 11px; padding-top: 5px;">{chave_nfe}</div>
+
+                        <br />
+                        <br />
+
+                        <div style="border-radius: 5px; border: 2px solid #000000; padding: 5px;">
+                            <div style="float: left; font-size: 12px; width: 100%;">
+                                <strong>PROTOCOLO DE AUTORIZAÇÃO DE USO:</strong> <br />
+                                <span>{protocolo_nfe} -{data_dt_protocolo_nfe}</span>
+                            </div>
+                        </div>
+
+                        <div style="content: ''; display: table; clear: both; margin-top: 6px;">
+                            <div style="float: left; width: 23%; border-radius: 5px; border: 2px solid #000000; padding: 5px;">
+                                <strong>NÚMERO: </strong> <br /> {numero_nfe}
+                            </div>
+                            <div style="float: left; width: 17%; border-radius: 5px; border: 2px solid #000000; padding: 5px; margin-left: 5px;">
+                                <strong>SÉRIE: </strong> <br /> {tp_nfe}
+                            </div>
+                            <div style="float: left; width: 17%; border-radius: 5px; border: 2px solid #000000; padding: 5px; margin-left: 5px;">
+                                <strong>TIPO: </strong> <br /> {serie_nfe}
+                            </div>
+                            <div style="float: left; width: 22%; border-radius: 5px; border: 2px solid #000000; padding: 5px; margin-left: 5px;">
+                                <strong>EMISSÃO: </strong> <br /> {dt_emis_nfe}
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+
+                        <div style="padding-left: 2px; margin-top: 1px; margin-bottom: 10px;">
+                            <div style="float: left; font-size: 12px; width: 100%;">
+                                <strong>Destinatário:</strong><br /> {nome_cliente_dest} <br />
+                                {tipo_endereco_cliente_dest} {logradouro_endereco_cliente_dest}, {numero_endereco_cliente_dest} <br />
+                                <!--If([complemento_endereco_cliente_dest])-->
+                                {complemento_endereco_cliente_dest} -
+                                <!--endIf-->
+                                {bairro_endereco_cliente_dest} <br />
+                                <strong>{cep_endereco_cliente_dest}</strong> {cidade_endereco_cliente_dest} / {uf_endereco_cliente_dest}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Fim Danfe -->
+
+        </div>
+
+    </div>
+
+    <div style="width: 680px;padding-top: 2px; text-align: center;">
+        <p style="text-decoration: underline; font-size: 10px;">ETIQUETA VÁLIDA ATÉ {dt_validade}</p>
+    </div>
+
+    <div style="padding-top: 20px;">
+
+        <div style="width: 680px;"><!-- instrução -->
+
+            <div style="border: 2px solid #888888; border-radius: 6px; padding: 15px; width: 680px; font-size: 10px; text-align: center;">
+
+                <div>
+                    <p>E A SUA PRIMEIRA VEZ FAZENDO ISSO? A GENTE TE AJUDA! <br /> CONFIRA NOSSO PASSO A PASSO:</p>
+                </div>
+
+                <div style="content: ''; display: table; clear: both; padding-top: 20px;">
+                    <div style="float: left; width: 33%;">
+                        <div style="padding-top: 4px; border-radius: 50%; border: 1px solid #000; background-color: #cecece; float: left; width: 20px; height: 20px; text-align: center;">1</div>
+                        <div style="float: left; width: 150px; margin-left: 10px; text-align: left;">RECORTE A ETIQUETA E A DANFE SIMPLIFICADA NA LINHA PONTILHADA!</div>
+                    </div>
+                    <div style="float: left; width: 33%;">
+                        <div style="padding-top: 4px; border-radius: 50%; border: 1px solid #000; background-color: #cecece; float: left; width: 20px; height: 20px; text-align: center;">2</div>
+                        <div style="float: left; width: 150px; margin-left: 10px; text-align: left;">COLE AS DUAS NA CAIXA. IMPORTANTE: NAO COLAR A FITA EM CIMA DO CODIGO DE BARRAS.</div>
+                    </div>
+                    <div style="float: left; width: 33%;">
+                        <div style="padding-top: 4px; border-radius: 50%; border: 1px solid #000; background-color: #cecece; float: left; width: 20px; height: 20px; text-align: center;">3</div>
+                        <div style="float: left; width: 150px; margin-left: 10px; text-align: left;">E, NAO ESQUECE DE OLHAR SE A CAIXA NAO ESTA AMASSADA E ESTA BEM FECHADINHA... NAO CUSTA CHECAR, NE?</div>
+                    </div>
+                </div>
+
+                <div style="content: ''; display: table; clear: both; padding-top: 20px;">
+                    <div style="float: left; width: 33%;">
+                        <div style="padding-top: 4px; border-radius: 50%; border: 1px solid #000; background-color: #cecece; float: left; width: 20px; height: 20px; text-align: center;">4</div>
+                        <div style="float: left; width: 150px; margin-left: 10px; text-align: left;">NAO COLE A ETIQUETA OU A DANFE SIMPLIFICADA NA DOBRADURA DA CAIXA, NAO ALTERE O TAMANHO E NEM RASURE!</div>
+                    </div>
+                    <div style="float: left; width: 33%;">
+                        <div style="padding-top: 4px; border-radius: 50%; border: 1px solid #000; background-color: #cecece; float: left; width: 20px; height: 20px; text-align: center;">5</div>
+                        <div style="float: left; width: 150px; margin-left: 10px; text-align: left;">CUIDADO COM A IMPRESSÃO DE BAIXA QUALIDADE!</div>
+                    </div>
+                    <div style="float: left; width: 33%;">
+                        <div style="padding-top: 4px; border-radius: 50%; border: 1px solid #000; background-color: #cecece; float: left; width: 20px; height: 20px; text-align: center;">6</div>
+                        <div style="float: left; width: 150px; margin-left: 10px; text-align: left;">ULTIMA CONFERIDA E AGORA BASTA LEVAR EM UM PONTO DE COLETA KANGU.</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- fim instrução -->
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
