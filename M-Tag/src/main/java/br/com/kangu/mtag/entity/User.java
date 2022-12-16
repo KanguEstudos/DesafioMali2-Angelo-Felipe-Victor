@@ -1,4 +1,4 @@
-package br.com.kangu.muser.entities;
+package br.com.kangu.mtag.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
