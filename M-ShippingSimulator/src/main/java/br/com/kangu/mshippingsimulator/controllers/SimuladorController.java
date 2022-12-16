@@ -1,25 +1,26 @@
 package br.com.kangu.mshippingsimulator.controllers;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import br.com.kangu.mshippingsimulator.entities.Simulation;
+import br.com.kangu.mshippingsimulator.repositories.SimulationRepository;
+import com.google.gson.Gson;
 import okhttp3.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/simulador")
 public class SimuladorController {
 
+    @Autowired
+    private SimulationRepository simulationRepository;
+
     @GetMapping
-    public String SimulaFrete() throws IOException {
+    public String SimulaFrete() throws Exception {
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -49,30 +50,18 @@ public class SimuladorController {
                 .addHeader("token", "64845971de3d90c6f5f3e97eabe0e12b8500752fb695283b7c5466c1221e7d16")
                 .addHeader("Content-Type", "application/json")
                 .build();
+
         Response response = client.newCall(request).execute();
 
-        return response.body().string();
-    }
+        JsonParse jsonParse = new JsonParse(response.body().string());
+        ArrayList<Simulation> arrayData = jsonParse.gatData();
 
-    @GetMapping(value = "/teste")
-    public void testeJson() throws ParseException {
+        for (int i = 0; i < arrayData.size(); i++) {
+            simulationRepository.save(arrayData.get(i));
+        }
 
-        String jsonString = "{\n" +
-                "    \"Name\": \"crunchify.com\",\n" +
-                "    \"Author\": \"App Shah\",\n" +
-                "    \"Company List\": [\n" +
-                "        \"Compnay: eBay\",\n" +
-                "        \"Compnay: Paypal\",\n" +
-                "        \"Compnay: Google\"\n" +
-                "    ]\n" +
-                "}";
-
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(jsonString);
-
-       // Testes de json parse. FAIL
+        return new Gson().toJson(arrayData);
 
     }
-
 
 }
