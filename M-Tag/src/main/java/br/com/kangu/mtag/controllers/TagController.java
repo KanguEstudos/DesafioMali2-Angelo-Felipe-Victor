@@ -1,6 +1,8 @@
 package br.com.kangu.mtag.controllers;
 
 import com.lowagie.text.DocumentException;
+import org.krysalis.barcode4j.impl.upcean.EAN13Bean;
+import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 @RestController
@@ -29,6 +32,20 @@ public class TagController {
         context.setVariable("to", "Baeldung");
 
         generatePdfFromHtml(templateEngine.process("thymeleaf_template", context));
+
+    }
+
+    @GetMapping(value = "/barcodeTest")
+    private BufferedImage BarcodeGenerator() throws DocumentException, IOException {
+
+        EAN13Bean barcodeGenerator = new EAN13Bean();
+        BitmapCanvasProvider canvas =
+                new BitmapCanvasProvider(160, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+
+        barcodeGenerator.generateBarcode(canvas, "123456789123");
+
+
+        return canvas.getBufferedImage();
 
     }
 

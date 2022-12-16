@@ -1,4 +1,4 @@
-package br.com.kangu.muser.entities;
+package br.com.kangu.morder.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
