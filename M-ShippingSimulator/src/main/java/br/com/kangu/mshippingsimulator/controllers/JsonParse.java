@@ -40,10 +40,7 @@ public class JsonParse {
             Long idSimulacao   = obRead.getLong("idSimulacao");
 
             Simulation simulation = new Simulation(vlrFrete, prazoEnt, dtPrevEnt, transp_nome, descricao, idSimulacao);
-            System.out.println(simulation);
-
             arrayData.add(simulation);
-
         }
 
         return arrayData;

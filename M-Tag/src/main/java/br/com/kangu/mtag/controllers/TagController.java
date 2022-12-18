@@ -32,6 +32,13 @@ public class TagController {
 
     }
 
+    @GetMapping(value = "/barcodeTest")
+    private void BarcodeGenerator() throws DocumentException, IOException {
+
+
+
+    }
+
     public void generatePdfFromHtml(String html) throws IOException, DocumentException {
         String outputFolder = System.getProperty("user.home") + File.separator + "thymeleaf.pdf";
         OutputStream outputStream = new FileOutputStream(outputFolder);
