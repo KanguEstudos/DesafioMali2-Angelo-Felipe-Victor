@@ -15,12 +15,8 @@ public class Client {
     private Long id;
     private String name;
 
-    @Column(unique=true)
     private String document;
-
-    @Column(unique=true)
     private String email;
-    private String password;
 
     private String type;
 

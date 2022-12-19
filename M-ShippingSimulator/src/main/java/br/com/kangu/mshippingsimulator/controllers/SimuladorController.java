@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,24 +20,24 @@ public class SimuladorController {
     @Autowired
     private SimulationRepository simulationRepository;
 
-    @GetMapping
-    public String SimulaFrete() throws Exception {
+    @GetMapping(value = "/{origem}/{destino}")
+    public String SimulaFrete(@PathVariable String origem, @PathVariable String destino) throws Exception {
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
 
         RequestBody body = RequestBody.create(mediaType, "{" +
-                                                                    "\"cepOrigem\": \"01010010\"," +
-                                                                    "\"cepDestino\": \"13472500\"," +
-                                                                    "\"vlrMerc\": \"20.50\"," +
+                                                                    "\"cepOrigem\": \""+origem+"\"," +
+                                                                    "\"cepDestino\": \""+destino+"\"," +
+                                                                    "\"vlrMerc\": \"100\"," +
                                                                     "\"pesoMerc\": \"0.040\"," +
                                                                     "\"volumes\": [" +
                                                                         "{" +
-                                                                        "\"peso\": \"0.040\"," +
-                                                                        "\"altura\": \"2\"," +
-                                                                        "\"largura\": \"11\"," +
-                                                                        "\"comprimento\": \"16\"" +
+                                                                            "\"peso\": \"0.200\"," +
+                                                                            "\"altura\": \"20\"," +
+                                                                            "\"largura\": \"10\"," +
+                                                                            "\"comprimento\": \"20\"" +
                                                                         "}" +
                                                                     "]," +
                                                                     "\"servicos\": [" +

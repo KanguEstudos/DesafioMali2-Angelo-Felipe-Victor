@@ -1,12 +1,9 @@
 package br.com.kangu.mshippingsimulator.controllers;
 
 import br.com.kangu.mshippingsimulator.entities.Simulation;
-import br.com.kangu.mshippingsimulator.repositories.SimulationRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
@@ -48,6 +45,7 @@ public class JsonParse {
     }
 
     public boolean isValid(String json) {
+
         try {
             new JSONArray(json);
         } catch (JSONException e) {

@@ -23,5 +23,6 @@ public class User {
     private String password;
 
     private String type;
+    private String CEP;
 
 }

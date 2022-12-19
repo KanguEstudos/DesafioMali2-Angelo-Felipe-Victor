@@ -5,10 +5,7 @@ import br.com.kangu.mproduct.entities.Product;
 import br.com.kangu.mproduct.repositories.CategoryRepository;
 import br.com.kangu.mproduct.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,15 +25,14 @@ public class ProductController {
         return result;
     }
 
+    @PostMapping()
+    public Product insertProduct(@RequestBody Product product){
+        return productRepository.save(product);
+    }
+
     @GetMapping(value="/{id}")
     public Product findById(@PathVariable Long id) {
         Product result = productRepository.findById(id).get();
-        return result;
-    }
-
-    @GetMapping(value="/categories")
-    public List<Category> findAllCategories() {
-        List<Category> result = categoryRepository.findAll();
         return result;
     }
 

@@ -1,0 +1,1 @@
+INSERT INTO tb_order (seller_id, buyer_id, simulation_id, product_id, paymentStatus, totalAmount, CEPDestin, CEPOrigin, Status) VALUES (2, 1, 1, 1, 4, 1, 510.32, '80620390', '80710000', 'Aguardando Envio');

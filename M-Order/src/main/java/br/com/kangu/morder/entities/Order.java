@@ -22,7 +22,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
-    private User Buyer;
+    private Client Buyer;
 
     @OneToOne
     @JoinColumn(name = "simulation_id")

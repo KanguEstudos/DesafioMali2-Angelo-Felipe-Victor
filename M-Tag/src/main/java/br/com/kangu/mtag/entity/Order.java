@@ -20,11 +20,15 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
-    private User Buyer;
+    private Client Buyer;
 
     @OneToOne
     @JoinColumn(name = "simulation_id")
     private Simulation simulation;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean paymentStatus;
